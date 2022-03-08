@@ -24,15 +24,15 @@ gitlab.sign_in(account='xxx', password='xxx')
 
 # create new accounts
 for student_info in students_info:
-		mail = student_info[3]
-		username = mail[:mail.index('@')]
-  	gitlab.create_new_account(name=username, username=username, mail=mail)
+    mail = student_info[3]
+    username = mail[:mail.index('@')]
+    gitlab.create_new_account(name=username, username=username, mail=mail)
 
 # create new groups
 for i in range(11):
-		team_name = f'team{i+1}'
-		# print(team_name)
-		gitlab.create_new_group(team_name)
+    team_name = f'team{i+1}'
+    # print(team_name)
+    gitlab.create_new_group(team_name)
 
 # invite students to group
 gitlab.invite_group_members(group_name='test', members=['wang', 'chen'])
