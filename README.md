@@ -35,6 +35,9 @@ for i in range(11):
     gitlab.create_new_group(team_name)
 
 # invite students to group
-gitlab.invite_group_members(group_name='test', members=['wang', 'chen'])
+gitlab.invite_group_members(group_name='test_group', members=['wang', 'chen'])
+
+# create new blank project and assign to group 'test_group'
+gitlab.create_new_blank_project('test_proj', 'test_group')
 ```
 

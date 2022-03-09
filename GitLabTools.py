@@ -1,6 +1,5 @@
 from playwright.sync_api import sync_playwright
 from typing import List
-import pandas as pd
 import time
 
 
@@ -57,6 +56,25 @@ class GitLabTools:
             self.__page.locator("input:has-text(\"Create group\")").click()
         time.sleep(1)
         return None
+
+    def create_new_blank_project(self, project_name: str, assign_to: str):
+        """
+        给assign_to的用户创建Private的Project
+        """
+        create_proj_url = self.url + '/projects/new#blank_project'
+        create_proj_url = create_proj_url.replace('//', '/')
+
+        self.__page.goto(create_proj_url)
+        # 填写项目名
+        self.__page.locator('xpath=//html/body/div[3]/div/div[3]/main/div[2]/div[2]/div[2]/div/div/form/div[1]/div[1]/input').fill(project_name)
+        # 选择assign的用户
+        self.__page.locator("[id=\"__BVID__15__BV_toggle_\"]").click()
+        time.sleep(0.1)
+        self.__page.locator(f"button[role=\"menuitem\"]:has-text(\"{assign_to}\")").click()
+        time.sleep(0.1)
+        # 点击创建项目
+        self.__page.locator('xpath=//html/body/div[3]/div/div[3]/main/div[2]/div[2]/div[2]/div/div/form/input[2]').click()
+        time.sleep(0.5)
 
     def invite_group_members(self, group_name: str, members: List[str], role='Maintainer'):
         """
